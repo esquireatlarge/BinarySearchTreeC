@@ -25,7 +25,6 @@ namespace Tree
                 delete m_left;
             if (m_right)
                 delete m_right;
-            delete m_right;
         }
 
     private:
