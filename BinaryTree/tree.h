@@ -106,13 +106,13 @@ namespace Tree
         TreeNode<T>* Find(T item, TreeNode<T>* start)
         {
             if (!start)
-                return NULL;
+                return nullptr;
             if (item == start->GetData())
                 return start;
             if (item > start->GetData())
-                return FindDFS(item, start->GetRight());
+                return Find(item, start->GetRight());
             else
-                return FindDFS(item, start->GetLeft());
+                return Find(item, start->GetLeft());
         }
 
         bool Insert(T item, TreeNode<T>* parent)
