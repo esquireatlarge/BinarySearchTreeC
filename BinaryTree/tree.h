@@ -82,7 +82,18 @@ namespace Tree
             return (abs(dr - dl) <= 1);
         }
 
-        void Balance();
+        //Balance using Day-Stout-Warren
+        void Balance()
+        {
+            //Let's make a dummy root.
+            TreeNode<T>* dmyRoot = new TreeNode<T>();
+            dmyRoot->SetRight(m_root);
+
+            int size = 0;
+            ToLinkedList(dmyRoot, size);
+
+
+        }
 
         virtual ~BinarySearchTree()
         {
@@ -91,6 +102,34 @@ namespace Tree
 
     private:
         TreeNode<T>* m_root;
+
+        void ToLinkedList(TreeNode<T>* root, int& size)
+        {
+            struct Node
+            {
+                TreeNode<T>* data;
+                Node* next;
+            };
+            Node head;
+            Node* tail = &head;
+            TreeNode<T>* r = root->GetRight();
+
+            head.data = root;
+
+            while (r != null)
+            {
+                if (r->GetLeft() == nullptr)
+                {
+                    tail->next 
+                }
+                else
+                {
+                }
+            }
+
+
+            while ()
+        }
 
         int Depth(TreeNode<T>* tn)
         {
