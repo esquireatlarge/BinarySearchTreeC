@@ -39,7 +39,7 @@ namespace Tree
     {
     public:
         explicit BinarySearchTree(T root)
-            : m_root()
+            : m_root(), m_numItems(0)
         {
             m_root = new TreeNode<T>(root);
         }
@@ -67,6 +67,7 @@ namespace Tree
 
         TreeNode<T>* TraverseBFS(T item)
         {
+            return DoBFS(item);
         }
 
         //DFS
@@ -102,6 +103,9 @@ namespace Tree
 
     private:
         TreeNode<T>* m_root;
+
+        //The amount of nodes present in the tree
+        int m_numItems; 
 
         void ToLinkedList(TreeNode<T>* root, int& size)
         {
@@ -167,6 +171,7 @@ namespace Tree
                 {
                     TreeNode<T>* n = new TreeNode<T>(item);
                     parent->SetRight(n);
+                    m_numItems++;
                     return true;
                 }
             }
@@ -179,10 +184,49 @@ namespace Tree
                 {
                     TreeNode<T>* n = new TreeNode<T>(item);
                     parent->SetLeft(n);
+                    m_numItems++;
                     return true;
                 }
             }
             return false;
+        }
+
+        TreeNode<T>* DoBFS(T item)
+        {
+            TreeNode<T>** nodes = new TreeNode<T>*[m_numItems + 1];
+            TreeNode<T>* target = nullptr;
+
+            int current = 0, next = 1;
+            nodes[0] = m_root;
+
+            bool found = false;
+            int i = 0;
+            while ((current < next) && !target)
+            {
+                TreeNode<T>* now = nodes[current];
+                current++;
+
+                printf("%d ", now->GetData());
+
+                if (now->GetData() == item)
+                    target = now;
+                else  
+                {
+                    if ((now->GetLeft()))
+                    {
+                        nodes[next] = now->GetLeft();
+                        next++;
+                    }
+                    if (now->GetRight())
+                    {
+                        nodes[next] = now->GetRight();
+                        next++;
+                    }
+                }
+            }
+
+            delete nodes;
+            return target;
         }
     };
 }
