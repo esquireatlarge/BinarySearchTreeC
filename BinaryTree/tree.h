@@ -206,8 +206,6 @@ namespace Tree
                 TreeNode<T>* now = nodes[current];
                 current++;
 
-                printf("%d ", now->GetData());
-
                 if (now->GetData() == item)
                     target = now;
                 else  
