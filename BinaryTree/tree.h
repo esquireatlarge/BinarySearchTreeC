@@ -12,8 +12,13 @@ namespace Tree
         {
         }
 
+        //Get this node's left child.
         inline TreeNode<T>* GetLeft()  { return m_left; }
+
+        //Get this node's right child.
         inline TreeNode<T>* GetRight() { return m_right; }
+
+        //Get the data this node holds.
         inline T         GetData()  { return m_data; }
 
         inline void      SetLeft(TreeNode<T>* t) { m_left = t; }
@@ -44,6 +49,18 @@ namespace Tree
             m_root = new TreeNode<T>(root);
         }
 
+        //Insert a node into the tree.
+        //Worst case: O(n)
+        //Why O(n)?  Let's assume so far we have only added numbers each one greater than the previous.
+        //So our tree now is basically a linked list, and if we add another node greater than all the rest, 
+        //we must iterate all the way down to the bottom through every node.
+
+
+        //Average: O(log(n))
+        //Why O(log(n))?  Assuming a balanced tree, we can shave off half the tree on an insertion!  
+        //Instead of checking every node as in the worst case, we can ignore one half of the tree depending on the node we
+        //are inserting.  
+
         bool Insert(T item)
         {
             return Insert(item, m_root);
@@ -52,10 +69,13 @@ namespace Tree
         bool Remove(T item)
         {
             TreeNode<T>* t = Find(item);
-            if (t)
+            if (!t->GetLeft() && !t->GetRight())
             {
+                //A leaf node can just be deleted.
                 delete t;
+                m_numItems--;
             }
+
 
             return false;
         }
