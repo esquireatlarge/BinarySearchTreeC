@@ -246,5 +246,26 @@ namespace Tree
             delete nodes;
             return target;
         }
+
+        //Let's take the right child of the argument node.
+        //Make it the parent node, and move the argument node down to a left child of the new parent.
+        //Assign the right node's left child to be a right child of the argument node.
+        //Function returns the new subtree root.
+        TreeNode<T>* LeftRotate(TreeNode<T>* item)
+        {
+            if (item->GetRight() == nullptr)
+                return item;
+
+            TreeNode<T>* right = item->GetRight();
+            item->SetRight(right->GetLeft());
+            right->SetLeft(item);
+
+            return right;
+        }
+
+        TreeNode<T>* RightRotate(TreeNode<T>* item)
+        {
+
+        }
     };
 }
