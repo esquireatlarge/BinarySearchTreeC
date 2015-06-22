@@ -263,9 +263,20 @@ namespace Tree
             return right;
         }
 
+        //Take the left child of the argument node.
+        //Make this child the parent node, moving the argument node down to a right child.
+        //Assign the left child's right node to be a left child of the argument node.
+        //Function returns the new subtree root.
         TreeNode<T>* RightRotate(TreeNode<T>* item)
         {
+            if (item->GetLeft() == nullptr)
+                return item;
 
+            TreeNode<T>* left = item->GetLeft();
+            item->SetLeft(left->GetRight());
+            left->SetRight(item);
+
+            return left;
         }
     };
 }
