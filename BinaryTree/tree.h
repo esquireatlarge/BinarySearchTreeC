@@ -49,9 +49,24 @@ namespace Tree
             m_root = new TreeNode<T>(root);
         }
 
+        //Will create a binary search tree of INTEGERS from a preorder string.
         explicit BinarySearchTree(const char* preOrder)
         {
+            //Create a tree from a preorder string.
+            int len = strlen(preOrder);
+            if (len < 1)
+                return;
 
+            //Validate that this string has only integers.
+            if (strpsn(preOrder, "0123456789") != len)
+                return;
+
+            //A preorder string can be directly inserted in the order the numbers appear in the string.
+            m_root = new TreeNode<T>(atoi(preOrder[0]));
+            for (int i = 0; i < len; i++)
+            {
+                Insert(atoi(preOrder[1]));
+            }
         }
 
         //Insert a node into the tree.
@@ -182,7 +197,7 @@ namespace Tree
 
             head.data = root;
 
-            while (r != null)
+            while (r != nullptr)
             {
                 if (r->GetLeft() == nullptr)
                 {
